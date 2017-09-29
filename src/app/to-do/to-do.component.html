@@ -1,0 +1,38 @@
+<div class="form-group col-md-4 col-md-offset-4">
+    <div class="input-group">
+      <input type="date" class="form-control" #datePicker placeholder="mm/dd/yyyy">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" (click)="searchFor(datePicker)">Search</button>
+      </span>
+    </div>
+</div>
+<div class="clearfix"></div>
+<ng-template ngFor [ngForOf]="tasks" let-task>
+    <section class="well col-sm-4 col-sm-offset-1">
+        <i class="fa fa-trash navbar-right btn btn-default" (click)="delete(task._id)" aria-hidden="true"></i>
+        <span class="head">{{task.TITLE}}</span>
+        <span class="date">{{task.DATE}}</span>
+        <p>{{task.BODY}}</p>
+        <label class="switch">
+            <input type="checkbox" [checked]="task.DONE" (click)="updateTask(task)">
+            <span class="slider round"></span>
+        </label>
+    </section>
+</ng-template>
+
+
+<section class="well col-sm-4 col-sm-offset-1">
+    <form [formGroup]="Form" (ngSubmit)='onSubmit()'>
+        <div class="form-group">
+            <input type="text" class="form-control" formControlName="title" placeholder="Title" />
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" formControlName="body" placeholder="Task Description" rows="4"></textarea>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-default btn-block">
+                Add Task
+            </button>
+        </div>
+    </form>
+</section>
